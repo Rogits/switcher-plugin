@@ -1,7 +1,7 @@
 /* 
  * 
  *  Author: @vic_rog
- *  Switches content based on menu in and across file.
+ *  Switches content based on menu using HTML or JSON.
  * 
  */
 
@@ -14,9 +14,10 @@ $.fn.switcher = function(options)
         inActiveClass: "btn-default", /* css class to inactivate menu link */
         textOnly: true, /* fetch html or text content only */
         changeTitle: false, /* change window's title */
-        useFile: false, /* Use HTML file to source content */
+        useHTMLFile: false, /* Use HTML file to source content */
+        useJSONFile: false, /* Use JSON file to source content */
         file: "", /* Url to File name that sources content */
-        animateContent: false,
+        animateContent: false, /* Animate on show */
         target: "#content" /* target HTML element to display text */
     };
     var settings = $.extend({}, defaults, options);
@@ -43,12 +44,23 @@ $.fn.switcher = function(options)
                 $obj.css({
                     "opacity": 0
                 });
-                if(settings.useFile)
+                if(settings.useHTMLFile)
                 {
                     $(target).load(settings.file + " " + 
                         $obj.attr("href"));
                 }
-                else
+                else if(settings.useJSONFile)
+                {
+                    $.getJSON(settings.file, function(data){
+                        $.each(data, function(k, v){
+                            if(($obj.attr("href")).substring(1) === k)
+                            {
+                                 $(target).html(v);
+                            }
+                        });
+                    });           
+                }               
+                else if(settings.textOnly)
                 {
                     $(target).text($($obj.attr("href")).text());
                 }
@@ -62,12 +74,23 @@ $.fn.switcher = function(options)
             }
             else
             {
-                if(settings.useFile)
+                if(settings.useHTMLFile)
                 {
                     $(target).load(settings.file + " " + 
                         $obj.attr("href"));
                 }
-                else
+                else if(settings.useJSONFile)
+                {
+                    $.getJSON(settings.file, function(data){
+                        $.each(data, function(k, v){
+                            if(($obj.attr("href")).substring(1) === k)
+                            {
+                                 $(target).html(v);
+                            }
+                        });
+                    });           
+                }
+                else if(settings.textOnly)
                 {
                     $(target).text($($obj.attr("href")).text());
                 }
@@ -84,12 +107,23 @@ $.fn.switcher = function(options)
                 $obj.css({
                     "opacity": 0
                 });
-                if(settings.useFile)
+                if(settings.useHTMLFile)
                 {
                     $(target).load(settings.file + " " + 
                         $obj.attr("href"));
                 }
-                else
+                else if(settings.useJSONFile)
+                {
+                    $.getJSON(settings.file, function(data){
+                        $.each(data, function(k, v){
+                            if(($obj.attr("href")).substring(1) === k)
+                            {
+                                 $(target).html(v);
+                            }
+                        });
+                    });           
+                }
+                else if(settings.textOnly)
                 {
                     $(target).html($($obj.attr("href")).text());
                 }
@@ -103,12 +137,23 @@ $.fn.switcher = function(options)
             }
             else
             {
-                if(settings.useFile)
+                if(settings.useHTMLFile)
                 {
                     $(target).load(settings.file + " " + 
                         $obj.attr("href"));
                 }
-                else
+                else if(settings.useJSONFile)
+                {
+                    $.getJSON(settings.file, function(data){
+                        $.each(data, function(k, v){
+                            if(($obj.attr("href")).substring(1) === k)
+                            {
+                                 $(target).html(v);
+                            }
+                        });
+                    });           
+                }
+                else if(settings.textOnly)
                 {
                     $(target).html($($obj.attr("href")).text());
                 }
